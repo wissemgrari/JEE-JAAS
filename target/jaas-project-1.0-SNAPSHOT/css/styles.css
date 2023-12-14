@@ -1,0 +1,82 @@
+:root {
+  --primary: #1D9BF0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F5F5F5;
+}
+
+.wrapper {
+  max-width: 560px;
+  margin: 50px auto;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 15px 10px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.card {
+  background-color: #FFF;
+  max-width: 480px;
+  padding: 20px;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.btn {
+  background-color: var(--primary);
+  color: #FFF;
+  padding: 0.75rem 1.3rem;
+  border-radius: 1.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  display: block;
+}
+
+.btn.btn-white {
+  background-color: #FFF;
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.btn.btn-dark {
+  background-color: #000;
+  color: #FFF;
+}
+
+.socials-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#google-btn::before {
+  content: "";
+  background-image: url("../assets/google.svg");
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+#apple-btn::before {
+  content: "";
+  background-image: url("../assets/apple.svg");
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
