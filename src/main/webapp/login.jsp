@@ -21,7 +21,7 @@
       <button class="btn w-full btn-white" type="button">Forget password ?</button>
     </div>
 
-    <p class="text-center text-black/70 text-sm mt-5">Don't have an account ? <span class="!text-[#1D9BF0] cursor-pointer font-medium">Sign up</span> </p>
+    <p class="text-center text-black/70 text-sm mt-5">Don't have an account ? <a class="!text-[#1D9BF0] cursor-pointer font-medium" href="register.jsp">Sign up</a> </p>
 
     <div class="relative py-5">
       <div class="absolute inset-0 flex items-center">
