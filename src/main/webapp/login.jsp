@@ -9,8 +9,11 @@
 <main class="wrapper">
   <form action=LoginServlet method=post class="card login">
     <div class="space-y-2">
-      <button id="google-btn" class="btn btn-white w-full socials-btn" type="button">Sign in with Google</button>
-      <button id="apple-btn" class="btn btn-white w-full socials-btn" type="button">Sign in with Apple</button>
+      <div class="relative flex justify-center">
+        <h1 class="text-2xl font-bold text-center mb-5">Sign In</h1>
+      </div>
+        <button id="google-btn" class="btn btn-white w-full socials-btn" type="button">Sign in with Google</button>
+        <button id="apple-btn" class="btn btn-white w-full socials-btn" type="button">Sign in with Apple</button>
     </div>
     <div class="relative py-5">
       <div class="absolute inset-0 flex items-center">
