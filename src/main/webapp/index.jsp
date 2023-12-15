@@ -11,6 +11,20 @@
   }
 %>
 <body>
+<!-- Navbar -->
+<nav class="navbar_bg text-white flex justify-between items-center py-3 px-5">
+  <h1 class="text-xl font-bold">Home</h1>
+  <div class="flex items-center space-x-5 text-xs">
+    <div class="flex items-center space-x-5">
+      <img
+              class="w-12 h-12 rounded-full object-cover border border-[#fff]"
+              src="./assets/user.jpg"
+              alt="avatar"
+      />
+      <button class="navbar_btn">Log Out</button>
+    </div>
+  </div>
+</nav>
 <main class="wrapper">
   <!-- post form -->
   <form action="#" class="card">
