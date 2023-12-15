@@ -8,13 +8,33 @@
   <link rel="stylesheet" href="style/main.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<%-- TODO: uncomment me :) --%>
-<%--<%--%>
-<%--  if (session.getAttribute("user") == null) {--%>
-<%--    response.sendRedirect("login.jsp");--%>
-<%--  }--%>
-<%--%>--%>
+
+<%
+  if (session.getAttribute("user") == null) {
+    response.sendRedirect("login.jsp");
+  }
+%>
 <body>
+<!-- Navbar -->
+<nav class="bg-[#1D9BF0] sticky z-[99] top-0 left-0 text-white flex justify-between items-center py-3 px-5">
+  <div class="flex items-center gap-5">
+    <a href="/" class="text-2xl font-semibold tracking-wider">FEED</a>
+    <a href="/users" class="text-base">users</a>
+  </div>
+  <form action="${pageContext.request.contextPath}/logout" method="POST" class="flex items-center space-x-5 text-xs">
+    <div class="flex items-center space-x-5">
+      <div class="w-10 h-10 rounded-full grid place-items-center bg-black text-white">
+        <p class="uppercase font-medium">
+          <% User user1 = (User) session.getAttribute("user");
+            if (user1 != null) { %>
+          <%= user1.getInitials() %>
+          <% } %>
+        </p>
+      </div>
+      <button class="btn btn-white" type="submit">Log out</button>
+    </div>
+  </form>
+</nav>
 <main class="w-full px-10 py-8">
   <h1 class="text-2xl font-semibold leading-tight mb-5">Accounts</h1>
   <div class="inline-block w-[840px] shadow-md rounded-lg overflow-hidden">
