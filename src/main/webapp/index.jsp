@@ -5,6 +5,11 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<%
+  if (session.getAttribute("user") == null) {
+    response.sendRedirect("login.jsp");
+  }
+%>
 <body>
 <main class="wrapper">
   <!-- post form -->

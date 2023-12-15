@@ -5,6 +5,11 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<%
+  if (session.getAttribute("user") != null) {
+    response.sendRedirect(request.getContextPath() + "/");
+  }
+%>
 <body>
 <main class="wrapper">
   <form action="RegisterServlet" method="POST" class="card">
@@ -12,8 +17,7 @@
     <h1 class="text-2xl font-bold text-center mb-5">Create an account</h1>
 
     <div class="space-y-3">
-      <input type="text" placeholder="Enter your firstname" name="firstname" class="w-full">
-      <input type="text" placeholder="Enter your lastname" name="lastname" class="w-full">
+      <input type="text" placeholder="Enter your fullname" name="fullname" class="w-full">
       <input type="text" placeholder="Enter your email" name="email" class="w-full">
       <input type="password" placeholder="Enter your password" name="password" class="w-full">
       <input type="password" placeholder="Confirm your password" name="password" class="w-full">
@@ -30,7 +34,7 @@
         <div class="w-full border-b border-gray-300"></div>
       </div>
       <div class="relative flex justify-center">
-        <span class="bg-white px-4 text-sm text-gray-600">OR</span>
+        <span class="bg-white px-4 text-xs text-gray-600">OR</span>
       </div>
     </div>
 

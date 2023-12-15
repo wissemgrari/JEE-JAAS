@@ -8,14 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.wissem.business.SingletonConnection;
+import com.wissem.business.entities.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/LoginServlet")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
@@ -27,21 +29,34 @@ public class LoginServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     response.setContentType("text/html");
 
-    String username = request.getParameter("username");
+    String email = request.getParameter("email");
     String password = request.getParameter("password");
+
     try {
-      PreparedStatement ps = connection.prepareStatement("SELECT username FROM users WHERE username=? AND password=?");
-      ps.setString(1, username);
+      PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email=? AND password=?");
+      ps.setString(1, email);
       ps.setString(2, password);
       ResultSet result = ps.executeQuery();
 
 
       if (result.next()) {
+        // create session and store the user
+        HttpSession session = request.getSession();
+        User user = new User(result);
+
+        session.setAttribute("user", user);
+        request.setAttribute("user", user);
+
         // Redirect to index.jsp upon successful login
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/");
+
       } else {
-        out.println("<h1>Login failed!</h1>");
+        // Set an error message attribute in the request
+        request.setAttribute("errorMessage", "Please check your email and password.");
+
+        // Forward the request back to the login.jsp page
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        dispatcher.forward(request, response);
       }
 
     } catch (SQLException e) {
