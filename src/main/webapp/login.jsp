@@ -2,12 +2,12 @@
 <html>
 <head>
   <title>Sign in</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="style/main.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <%
   if (session.getAttribute("user") != null) {
-    response.sendRedirect(request.getContextPath() + "/");
+    response.sendRedirect(request.getContextPath() + "/index.jsp");
   }
 %>
 <body>
