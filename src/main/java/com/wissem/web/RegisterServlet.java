@@ -65,9 +65,6 @@ public class RegisterServlet extends HttpServlet {
       int rowsAffected = ps2.executeUpdate();
 
       if (rowsAffected > 0) {
-        // Registration successful
-        // Redirect to login.jsp
-        // response.sendRedirect(request.getContextPath() + "/login.jsp");
         request.setAttribute("successMessage", "Registration completed. You can login.");
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         dispatcher.forward(request, response);

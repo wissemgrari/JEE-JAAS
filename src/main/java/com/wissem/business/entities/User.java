@@ -25,6 +25,7 @@ public class User {
     this.fullname = resultSet.getString("fullname");
     this.email = resultSet.getString("email");
     this.password = resultSet.getString("password");
+    this.role = Role.valueOf(resultSet.getString("role"));
   }
   public Long getId() {
     return id;
@@ -76,5 +77,22 @@ public class User {
       ", role='" + role + '\'' +
       '}';
   }
+
+  public String getInitials() {
+    if (fullname != null && !fullname.isEmpty()) {
+      String[] names = fullname.split("\\s+");
+      StringBuilder initials = new StringBuilder();
+
+      for (String name : names) {
+        if (!name.isEmpty()) {
+          initials.append(name.charAt(0));
+        }
+      }
+
+      return initials.toString().toUpperCase();
+    }
+    return "";
+  }
+
 }
 

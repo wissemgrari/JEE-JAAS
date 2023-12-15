@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.wissem.business.SingletonConnection;
 import com.wissem.business.entities.Post;
+import com.wissem.business.entities.Role;
 import com.wissem.business.entities.User;
 import com.wissem.dao.PostDAO;
 import com.wissem.util.GsonLocalDateTimeAdapter;
@@ -29,14 +30,13 @@ public class IndexServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private final Connection connection = SingletonConnection.getConnection();
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     List<Post> posts = PostDAO.getPosts();
 
     Gson gson = new GsonBuilder()
       .registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter())
       .create();
-//    Gson gson = new Gson();
+
     String json = gson.toJson(posts);
 
     // Set content type and write JSON to the response
@@ -47,10 +47,19 @@ public class IndexServlet extends HttpServlet {
 
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    response.setContentType("text/html");
+
     HttpSession session = request.getSession();
     User user = (User) session.getAttribute("user");
 
+    // prevent unauthorized users from uploading posts
+    if(user.getRole().equals(Role.READER)) {
+      request.setAttribute("errorMessage", "Unauthorized action. Please seek proper authorization to proceed.");
+      RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
+      dispatcher.forward(request, response);
+      return;
+    }
+
+    // retreive post content from the jsp
     String postContent = request.getParameter("post-content");
 
     // create the post object
@@ -70,11 +79,13 @@ public class IndexServlet extends HttpServlet {
       int rowsAffected = ps.executeUpdate();
 
       if (rowsAffected > 0) {
-        request.setAttribute("successMessage", "Post uploaded.");
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        request.setAttribute("successMessage", "Your post has been uploaded successfully.");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("success.jsp");
+        dispatcher.forward(request, response);
       } else {
         request.setAttribute("errorMessage", "Something went wrong!");
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
+        dispatcher.forward(request, response);
       }
     } catch (SQLException e) {
       throw new ServletException("Database access error", e);
