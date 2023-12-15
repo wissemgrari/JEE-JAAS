@@ -8,6 +8,9 @@ public class User {
   private String fullname;
   private String email;
   private String password;
+
+  private Role role = Role.READER;
+
   public User(){};
   public User(Long id, String fullname, String email, String password) {
     this.id = id;
@@ -55,6 +58,14 @@ public class User {
     this.password = password;
   }
 
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -62,6 +73,7 @@ public class User {
       ", fullname='" + fullname + '\'' +
       ", email='" + email + '\'' +
       ", password='" + password + '\'' +
+      ", role='" + role + '\'' +
       '}';
   }
 }
