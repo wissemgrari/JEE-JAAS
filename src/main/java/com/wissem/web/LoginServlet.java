@@ -1,7 +1,6 @@
 package com.wissem.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,6 @@ public class LoginServlet extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
     response.setContentType("text/html");
 
     String email = request.getParameter("email");
