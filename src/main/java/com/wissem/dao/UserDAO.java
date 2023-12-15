@@ -25,6 +25,7 @@ public class UserDAO {
         user.setFullname(rs.getString("fullname"));
         user.setEmail(rs.getString("email"));
         user.setRole(Role.valueOf(rs.getString("role")));
+        user.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
 
         users.add(user);
       }

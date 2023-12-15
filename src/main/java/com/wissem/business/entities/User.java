@@ -2,6 +2,7 @@ package com.wissem.business.entities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class User {
   private Long id;
@@ -9,14 +10,18 @@ public class User {
   private String email;
   private String password;
 
+  private LocalDateTime createdAt;
+
   private Role role = Role.READER;
 
   public User(){};
-  public User(Long id, String fullname, String email, String password) {
+
+  public User(Long id, String fullname, String email, String password, LocalDateTime createdAt) {
     this.id = id;
     this.fullname = fullname;
     this.email = email;
     this.password = password;
+    this.createdAt = createdAt;
   }
 
   // Constructor that takes a ResultSet as a parameter
@@ -67,6 +72,14 @@ public class User {
     this.role = role;
   }
 
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -75,6 +88,7 @@ public class User {
       ", email='" + email + '\'' +
       ", password='" + password + '\'' +
       ", role='" + role + '\'' +
+      ", createdAt='" + createdAt + '\'' +
       '}';
   }
 
