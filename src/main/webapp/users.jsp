@@ -10,22 +10,29 @@
 </head>
 
 <%
-  if (session.getAttribute("user") == null) {
+  User user = (User) session.getAttribute("user");
+  if (user == null) {
     response.sendRedirect("login.jsp");
+  } else if (!user.getRole().toString().equals("ADMIN")) {
+    response.sendRedirect("index.jsp");
   }
 %>
+
 <body>
 <!-- Navbar -->
 <nav class="bg-[#1D9BF0] sticky z-[99] top-0 left-0 text-white flex justify-between items-center py-3 px-5">
   <div class="flex items-center gap-5">
     <a href="/" class="text-2xl font-semibold tracking-wider">FEED</a>
-    <a href="/users" class="text-base">users</a>
+    <% User user1 = (User) session.getAttribute("user");
+      if (user1 != null && user1.getRole().toString().equals("ADMIN")) { %>
+    <a href="/users" class="text-base">Users</a>
+    <% } %>
   </div>
   <form action="${pageContext.request.contextPath}/logout" method="POST" class="flex items-center space-x-5 text-xs">
     <div class="flex items-center space-x-5">
       <div class="w-10 h-10 rounded-full grid place-items-center bg-black text-white">
         <p class="uppercase font-medium">
-          <% User user1 = (User) session.getAttribute("user");
+          <%
             if (user1 != null) { %>
           <%= user1.getInitials() %>
           <% } %>
@@ -35,6 +42,7 @@
     </div>
   </form>
 </nav>
+
 <main class="w-full px-10 py-8">
   <h1 class="text-2xl font-semibold leading-tight mb-5">Accounts</h1>
   <div class="inline-block w-[840px] shadow-md rounded-lg overflow-hidden">
@@ -76,36 +84,36 @@
       <tbody>
       <%
         List<User> users = (List<User>) request.getAttribute("users");
-        for (User user : users) {
+        for (User user2 : users) {
       %>
       <tr>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap"><%= user.getId() %></p>
+          <p class="text-gray-900 whitespace-no-wrap"><%= user2.getId() %></p>
         </td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-full grid place-items-center bg-[#1D9BF0]/70 text-white">
               <p class="uppercase">
-              <%= user.getInitials() %>
+              <%= user2.getInitials() %>
               </p>
             </div>
             <div class="ml-3">
               <p class="text-gray-900 whitespace-no-wrap">
-                <%= user.getFullname() %>
+                <%= user2.getFullname() %>
               </p>
             </div>
           </div>
         </td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap"><%= user.getEmail() %></p>
+          <p class="text-gray-900 whitespace-no-wrap"><%= user2.getEmail() %></p>
         </td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap"><%= DateFormatter.formatToCustomPattern(user.getCreatedAt(), "MMM d, yyyy") %></p>
+          <p class="text-gray-900 whitespace-no-wrap"><%= DateFormatter.formatToCustomPattern(user2.getCreatedAt(), "MMM d, yyyy") %></p>
         </td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                   <span class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                  <span class="relative capitalize text-xs"><%= user.getRole() %></span>
+                  <span class="relative capitalize text-xs"><%= user2.getRole() %></span>
                 </span>
         </td>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">

@@ -22,13 +22,16 @@
 <nav class="bg-[#1D9BF0] sticky z-[99] top-0 left-0 text-white flex justify-between items-center py-3 px-5">
   <div class="flex items-center gap-5">
     <a href="/" class="text-2xl font-semibold tracking-wider">FEED</a>
-    <a href="/users" class="text-base">users</a>
+    <% User user1 = (User) session.getAttribute("user");
+      if (user1 != null && user1.getRole().toString().equals("ADMIN")) { %>
+    <a href="/users" class="text-base">Users</a>
+    <% } %>
   </div>
   <form action="${pageContext.request.contextPath}/logout" method="POST" class="flex items-center space-x-5 text-xs">
     <div class="flex items-center space-x-5">
       <div class="w-10 h-10 rounded-full grid place-items-center bg-black text-white">
         <p class="uppercase font-medium">
-          <% User user1 = (User) session.getAttribute("user");
+          <%
             if (user1 != null) { %>
           <%= user1.getInitials() %>
           <% } %>
@@ -38,14 +41,19 @@
     </div>
   </form>
 </nav>
+
 <main class="wrapper">
   <!-- post form -->
   <form action="${pageContext.request.contextPath}/posts" method="POST" class="card">
-    <div class="flex items-center gap-5">
-      <img
-        class="w-14 h-14 rounded-full object-cover border border-[#1D9BF0] self-start"
-        src="./assets/user.jpg"
-        alt="user"/>
+    <div class="flex gap-5">
+      <div class="!w-10 !h-10 !rounded-full !grid !place-items-center p-[10px] bg-[#1472b19c] text-white">
+        <p class="uppercase font-medium text-xs">
+          <%
+            if (user1 != null) { %>
+          <%= user1.getInitials() %>
+          <% } %>
+        </p>
+      </div>
       <textarea
         name="post-content"
         class="w-full pt-2 pr-4 bg-transparent outline-none placeholder-gray-400 text-gray-700 resize-none overflow-hidden"
@@ -112,6 +120,17 @@
       function displayPosts(posts) {
           var postsContainer = $('#posts-container');
 
+          function getInitials(fullName) {
+              // Split the full name into an array of words
+              const words = fullName.split(" ");
+
+              // Extract the first letter from each word and concatenate them
+              const initials = words.map(word => word.charAt(0)).join("");
+
+              // Convert the initials to uppercase
+              return initials.toUpperCase();
+          }
+
           // Iterate through the posts and append them to the container
           $.each(posts, function (index, post) {
               // Create a new card element for each post
@@ -119,7 +138,11 @@
                   '<div class="card">' +
                   '<img class="w-4 absolute top-3 right-5 opacity-60 cursor-pointer" src="https://img.icons8.com/material-rounded/24/more.png" alt="more"/>' +
                   '<div class="flex items-center gap-3">' +
-                  '<img class="w-14 h-14 rounded-full object-cover border border-[#1D9BF0]" src="./assets/user.jpg" alt="avatar"/>' +
+                  '<div class="w-10 h-10 rounded-full grid place-items-center bg-[#1472b19c] text-white">' +
+                  '<p class="uppercase font-medium !text-xs">' +
+                  getInitials(post.creator) +
+                  '</p>' +
+                  '</div>' +
                   '<div class="flex flex-col">' +
                   '<h1 class="font-medium text-black/80">' +
                   post.creator +
