@@ -35,7 +35,7 @@
       <%= user1.getFullname() %>
       <% } %>
     </p>
-      <button class="btn btn-white" type="submit">Log out</button>
+      <button class="btn btn-white hover:opacity-75" type="submit">Log out</button>
     </div>
   </form>
 </nav>
@@ -78,7 +78,7 @@
                 d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
       </div>
-      <button class="btn py-2 px-8 ml-auto">POST</button>
+      <button class="btn py-2 px-8 ml-auto hover:opacity-75">POST</button>
     </div>
   </form>
 
@@ -156,9 +156,9 @@
                   '</p>' +
                   '</div>' +
                   '<div class="mt-5 border-t border-[#9ca3af52] flex items-center justify-end gap-5 pt-3">' +
-                  '<img class="w-5 cursor-pointer" src="./assets/heart.svg" alt="heart">' +
-                  '<img class="w-5 cursor-pointer" src="./assets/comment.svg" alt="comment">' +
-                  '<img class="w-5 cursor-pointer" src="./assets/share.svg" alt="share">' +
+                  '<img class="w-5 cursor-pointer hover:scale-125 transition duration-300" src="./assets/heart.svg" alt="heart">' +
+                  '<img class="w-5 cursor-pointer hover:scale-125 transition duration-300" src="./assets/comment.svg" alt="comment">' +
+                  '<img class="w-5 cursor-pointer hover:scale-125 transition duration-300" src="./assets/share.svg" alt="share">' +
                   '</div>' +
                   '</div>';
 

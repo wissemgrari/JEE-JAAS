@@ -24,7 +24,7 @@
         <%= user1.getFullname() %>
         <% } %>
       </p>
-      <button class="btn btn-white" type="submit">Log out</button>
+      <button class="btn btn-white hover:opacity-75" type="submit">Log out</button>
     </div>
   </form>
 </nav>
@@ -33,7 +33,7 @@
   <%-- Check for the success message and display it --%>
   <% String successMessage = (String) request.getAttribute("successMessage"); %>
   <% if (successMessage != null && !successMessage.isEmpty()) { %>
-  <div class="relative max-w-[480px] p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100" role="alert">
+  <div class="relative max-w-[480px] p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 border-2 border-green-400" role="alert">
     <div class="flex items-start">
       <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
            fill="currentColor" viewBox="0 0 20 20">
@@ -42,7 +42,7 @@
       </svg>
       <div class="flex flex-col">
         <h1 class="font-medium">SUCCESS</h1>
-        <p class="font-normal mt-2"><%= successMessage %>
+        <p class="font-normal mt-2 animate-pulse"><%= successMessage %>
         </p>
         <a class="bg-green-300 py-2 px-3 inline-block w-max rounded mt-5 font-medium" href="/">I understand</a>
       </div>

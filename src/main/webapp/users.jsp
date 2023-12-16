@@ -37,13 +37,13 @@
         <%= user1.getFullname() %>
         <% } %>
       </p>
-      <button class="btn btn-white" type="submit">Log out</button>
+      <button class="btn btn-white hover:opacity-75" type="submit">Log out</button>
     </div>
   </form>
 </nav>
 
 <main class="w-full px-10 py-8">
-  <h1 class="text-2xl font-semibold leading-tight mb-5">Accounts</h1>
+  <h1 class="text-2xl font-semibold leading-tight mb-5">Users</h1>
   <div class="inline-block w-[920px] shadow-md rounded-lg overflow-hidden">
     <table class="table-auto w-full leading-normal">
       <thead>

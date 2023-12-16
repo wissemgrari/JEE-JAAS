@@ -46,7 +46,7 @@
     </div>
 
     <div class="mt-5 space-y-3">
-      <button class="btn w-full btn-dark" type="submit">Login</button>
+      <button class="btn w-full btn-dark hover:opacity-75" type="submit">Login</button>
       <button class="btn w-full btn-white" type="button">Forget password ?</button>
     </div>
 
