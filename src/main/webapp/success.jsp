@@ -18,14 +18,12 @@
   </div>
   <form action="${pageContext.request.contextPath}/logout" method="POST" class="flex items-center space-x-5 text-xs">
     <div class="flex items-center space-x-5">
-      <div class="w-10 h-10 rounded-full grid place-items-center bg-black text-white">
-        <p class="uppercase font-medium">
-          <%
-            if (user1 != null) { %>
-          <%= user1.getInitials() %>
-          <% } %>
-        </p>
-      </div>
+      <p class="captiliaze font-medium text-base">
+        <%
+          if (user1 != null) { %>
+        <%= user1.getFullname() %>
+        <% } %>
+      </p>
       <button class="btn btn-white" type="submit">Log out</button>
     </div>
   </form>
